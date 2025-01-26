@@ -1,7 +1,6 @@
-"use client";
-
 import * as React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
+import 'dayjs/locale/es';  
 import Badge from '@mui/material/Badge';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -10,20 +9,24 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
-import { fetchHighlightedDays } from '../api/calendar'; // Import the fetch function
+import { fetchHighlightedDays } from '../api/calendar'; 
+
+
+
+
+dayjs.locale('es');  
 
 export default function DateCalendarServerRequest() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [highlightedDates, setHighlightedDates] = React.useState<{ [key: string]: string }>({});
   const [selectedEvent, setSelectedEvent] = React.useState<{ title: string; date: string } | null>(null);
 
-  const currentYear = dayjs().year(); // Get the current year
+  const currentYear = dayjs().year(); 
 
-  // Fetch the highlighted days from the API
   const fetchAndSetHighlightedDays = async () => {
     setIsLoading(true);
-    const events = await fetchHighlightedDays(); // Fetch events
-    setHighlightedDates(events); // Set the events for highlighting
+    const events = await fetchHighlightedDays(); 
+    setHighlightedDates(events); 
     setIsLoading(false);
   };
 
@@ -31,13 +34,14 @@ export default function DateCalendarServerRequest() {
     fetchAndSetHighlightedDays();
   }, []);
 
-  // Custom Day rendering with Badge to highlight dates
   const ServerDay = (props: any) => {
     const { day, outsideCurrentMonth, ...other } = props;
     const formattedDate = day.format('YYYY-MM-DD');
     const isSelected = !!highlightedDates[formattedDate];
+    const isToday = day.isSame(dayjs(), 'day');  
 
     return (
+      
       <Badge
         key={day.toString()}
         overlap="circular"
@@ -50,21 +54,30 @@ export default function DateCalendarServerRequest() {
           onClick={() => {
             if (isSelected) setSelectedEvent({ title: highlightedDates[formattedDate], date: formattedDate });
           }}
+          sx={{
+            color: 'black', 
+            ...(isToday && {
+              backgroundColor: 'green', 
+              color: 'white', 
+            }),
+            ...(isSelected && {
+              border: '2px solid black', 
+              backgroundColor: 'transparent', 
+            }),
+          }}
         />
       </Badge>
     );
   };
 
-  // Restrict to the current year and month
   const handleMonthChange = (date: Dayjs) => {
     if (date.year() !== currentYear) {
-      return; // Prevent changing the year
+      return; 
     }
   };
 
-  // Restrict navigation to the current year by setting min and max dates
-  const minDate = dayjs().startOf('year'); // Start of current year
-  const maxDate = dayjs().endOf('year'); // End of current year
+  const minDate = dayjs().startOf('year'); 
+  const maxDate = dayjs().endOf('year'); 
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -72,9 +85,31 @@ export default function DateCalendarServerRequest() {
         loading={isLoading}
         renderLoading={() => <DayCalendarSkeleton />}
         slots={{ day: ServerDay }}
-        onMonthChange={handleMonthChange} // Restrict month change to the current year
-        minDate={minDate} // Restrict to the start of the current year
-        maxDate={maxDate} // Restrict to the end of the current year
+        onMonthChange={handleMonthChange} 
+        minDate={minDate} 
+        maxDate={maxDate}
+        sx={{
+          '.MuiCalendarPicker-header': {
+            backgroundColor: '#4caf50', 
+            color: 'white',  
+          },
+          '.MuiPickersCalendarHeader-root': {
+            backgroundColor: '#4caf50', 
+            color: 'white',  
+          },
+          '.MuiPickersCalendarHeader-iconButton': {
+            color: 'white',  
+          },
+          '.MuiCalendarPicker-view': {
+            backgroundColor: '#4caf50', 
+          },
+          '.MuiCalendarPicker-root': {
+            border: '2px solid #000', 
+            borderRadius: '8px', 
+            width: '500px', 
+            height: '600px', 
+          },
+        }}
       />
       <Dialog open={!!selectedEvent} onClose={() => setSelectedEvent(null)}>
         <DialogTitle>{selectedEvent?.title}</DialogTitle>
