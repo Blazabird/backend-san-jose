@@ -11,9 +11,6 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import { fetchHighlightedDays } from '../api/calendar'; 
 
-
-
-
 dayjs.locale('es');  
 
 export default function DateCalendarServerRequest() {
@@ -41,7 +38,6 @@ export default function DateCalendarServerRequest() {
     const isToday = day.isSame(dayjs(), 'day');  
 
     return (
-      
       <Badge
         key={day.toString()}
         overlap="circular"
@@ -56,13 +52,14 @@ export default function DateCalendarServerRequest() {
           }}
           sx={{
             color: 'black', 
-            ...(isToday && {
-              backgroundColor: 'green', 
-              color: 'white', 
-            }),
             ...(isSelected && {
               border: '2px solid black', 
               backgroundColor: 'transparent', 
+            }),
+            ...(isToday && {
+              backgroundColor: 'green', 
+              color: 'white', 
+              border: '2px solid black', 
             }),
           }}
         />

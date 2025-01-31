@@ -125,8 +125,8 @@ const Banner: React.FC = () => {
             {bannerData.data.description || "Descripcion"}
           </p>
           <div className="mt-8">
-            <button className="relative overflow-hidden px-10 py-2 bg-green-500 text-white font-medium text-sm md:text-base rounded-lg shadow-md group">
-              <span className="absolute inset-0 bg-green-600 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+            <button className="relative overflow-hidden px-10 py-2 bg-green-600 text-white font-medium text-sm md:text-base rounded-lg shadow-md group">
+              <span className="absolute inset-0 bg-green-700 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
               <span className="relative z-10 text-lg font-bold">Ver Más</span>
             </button>
           </div>

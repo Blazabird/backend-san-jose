@@ -27,12 +27,12 @@ const OfertaAcademica: React.FC = () => {
   }
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-gray-200 pb-10 ">
       {/* Optional Divider to separate from the banner */}
       <Divider className="my-8" sx={{ borderBottomWidth: 4 }} />
 
       {/* Centered container with no vertical padding changes */}
-      <div className="w-full max-w-7xl text-center px-4 lg:px-12 py-8 bg-gray-100 mt-10 rounded-lg shadow-xl mx-auto">
+      <div className="w-full max-w-7xl text-center px-4 lg:px-12 py-8 bg-gray-100 mt-10 rounded-lg shadow-xl mx-auto ">
         {/* Title */}
         <Typography
           gutterBottom

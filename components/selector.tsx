@@ -5,6 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import DateCalendarServerRequest from "./calendar";
+import NewsSection from "./news";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,7 +53,7 @@ export default function BasicTabs() {
       }}
     >
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
+        <Tabs className="bg-gray-300 rounded-xl"
           value={value}
           onChange={handleChange}
           centered
@@ -72,7 +73,7 @@ export default function BasicTabs() {
         <DateCalendarServerRequest />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+        <NewsSection/>
       </CustomTabPanel>
     </Box>
   );

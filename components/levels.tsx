@@ -25,43 +25,115 @@ export default function Leves() {
   }, []);
 
   if (loading) {
-    return <CircularProgress />;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#ffffff", // Clean white background
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (!levels.length) {
-    return <div>No levels available.</div>;
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          fontSize: "18px",
+          color: "#004d00", // Dark green text
+        }}
+      >
+        No levels available.
+      </div>
+    );
   }
 
   return (
-    <Grid container spacing={3} justifyContent="center">
-     
-      <Grid item xs={12}>
+    <div className="bg-gray-200"
+      style={{
+       // Clean white background
+        padding: "24px",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Grid
+        container
+        spacing={4}
+        justifyContent="center"
+        sx={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        {levels.map((item) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
+            <Card className="border-4 border-green-500"
+              sx={{
+                maxWidth: "300px",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: "16px",
+                backgroundColor: "#ffffff", // White card background
+                boxShadow: "0px 4px 12px rgba(0, 64, 0, 0.3)", // Dark green shadow
+                margin: "10px", // Add spacing between cards
+                transition: "transform 0.3s ease",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: "0px 6px 15px rgba(0, 64, 0, 0.5)", // Stronger green shadow
+                },
+              }}
+            >
+              <CardActionArea sx={{ display: "flex", flexDirection: "column" }}>
+                <CardMedia
+                  component="img"
+                  image={item.image || "/default-image.jpg"}
+                  alt={item.title}
+                  sx={{
+                    height: "200px",
+                    width: "100%",
+                    objectFit: "contain",
+                    padding: "8px",
+                    borderTopLeftRadius: "16px",
+                    borderTopRightRadius: "16px",
+                  }}
+                />
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    sx={{
+                      color: "#ffd700", // Bright yellow for titles
+                      textAlign: "center",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                  <Typography
+                    variant="body2" 
+                    sx={{
+                      color: "#004d00", // Rich green for descriptions
+                      textAlign: "center",
+                    }}
+                  >
+                    {item.description}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
-
-      {/* Display the levels below the academic offer */}
-      {levels.map((item, index) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={item.id} sx={{ paddingLeft: index === 0 ? "16px" : 0 }}>
-          <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="140"
-                image={item.image || "/default-image.jpg"}
-                alt={item.title}
-              />
-              <CardContent>
-                {/* Title with green color and centered */}
-                <Typography gutterBottom variant="h5" component="div" className="text-yellow-500 text-center">
-                  {item.title}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  {item.description}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+    </div>
   );
 }
