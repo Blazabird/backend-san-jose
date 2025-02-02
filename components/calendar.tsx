@@ -11,7 +11,7 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import { fetchHighlightedDays } from '../api/calendar'; 
 
-dayjs.locale('es');  
+dayjs.locale('es');  // Set global locale to Spanish
 
 export default function DateCalendarServerRequest() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -77,7 +77,7 @@ export default function DateCalendarServerRequest() {
   const maxDate = dayjs().endOf('year'); 
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es"> {/* Set locale explicitly */}
       <DateCalendar
         loading={isLoading}
         renderLoading={() => <DayCalendarSkeleton />}

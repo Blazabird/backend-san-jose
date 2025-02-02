@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchAcademicOffer, AcademicOffer } from "../api/offer";
 import { Typography, CircularProgress, Divider } from "@mui/material";
+import ImageGallery from "./slider";
 
 const OfertaAcademica: React.FC = () => {
   const [academicOffer, setAcademicOffer] = useState<AcademicOffer | null>(null);
@@ -27,12 +28,13 @@ const OfertaAcademica: React.FC = () => {
   }
 
   return (
-    <div className="w-full bg-gray-200 pb-10 ">
+    <div className="w-full  bg-gray-100 pb-10 ">
       {/* Optional Divider to separate from the banner */}
       <Divider className="my-8" sx={{ borderBottomWidth: 4 }} />
 
       {/* Centered container with no vertical padding changes */}
-      <div className="w-full max-w-7xl text-center px-4 lg:px-12 py-8 bg-gray-100 mt-10 rounded-lg shadow-xl mx-auto ">
+      <div className="w-full max-w-[1500px] text-center px-8 lg:px-20 py-12 bg-gray-100 mt-12 rounded-lg shadow-2xl mx-auto">
+
         {/* Title */}
         <Typography
           gutterBottom
@@ -46,6 +48,7 @@ const OfertaAcademica: React.FC = () => {
         <Typography className="text-xl text-gray-600 mt-4">
           {academicOffer.description}
         </Typography>
+        <ImageGallery/>
       </div>
     </div>
   );

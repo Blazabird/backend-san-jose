@@ -6,14 +6,15 @@ import Levels from "../../components/levels";
 import AcademicOffer  from "../../components/academicOffer";
 
 
+
 export default function Home() {
   return (
-    <div>
+    <div className="bg-gray-100">
         <ResponsiveAppBar />
         <Banner />
         <AcademicOffer/>
-        <Levels/>
         <CustomTabPanel/>
+        <Levels/>
     </div>
   );
 }
