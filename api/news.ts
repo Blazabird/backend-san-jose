@@ -1,18 +1,19 @@
-// news.ts
 export const fetchNews = async () => {
-    try {
-      const response = await fetch("http://localhost:1500/api/news?populate=*", {
-        method: "GET",
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Failed to fetch news: ${response.statusText}`);
-      }
-  
-      const responseData = await response.json();
-      const baseURL = "http://localhost:1500"; 
-  
-      return responseData.data.map((item: any) => ({
+  try {
+    const response = await fetch("http://localhost:1500/api/news?populate=*", {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch news: ${response.statusText}`);
+    }
+
+    const responseData = await response.json();
+    const baseURL = "http://localhost:1500"; 
+
+    // Sorting the news articles by date (newest first)
+    const sortedNews = responseData.data
+      .map((item: any) => ({
         id: item.id,
         title: item.title,
         description: item.description,
@@ -22,10 +23,12 @@ export const fetchNews = async () => {
           : item.image?.url
           ? `${baseURL}${item.image.url}`
           : "", 
-      }));
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
-  
+      }))
+      .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());  // Sort descending by date
+
+    return sortedNews;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};

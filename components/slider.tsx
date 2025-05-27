@@ -32,7 +32,7 @@ const ImageSlider: React.FC = () => {
 
   return (
     <div className="w-full p-4 flex justify-center ">
-      <div className="relative w-full max-w-7xl  overflow-hidden bg-gray-100 p-10 rounded-lg">
+      <div className="relative w-full max-w-7xl  overflow-hidden bg-gray-200 p-10 rounded-lg">
         {images.length >= 3 ? (
           <>
             

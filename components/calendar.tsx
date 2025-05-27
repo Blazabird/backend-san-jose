@@ -1,3 +1,4 @@
+"use client"
 import * as React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/es';  

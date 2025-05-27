@@ -1,26 +1,27 @@
-'use client'
+'use client';
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import '@fontsource/poppins/700.css';
 
 const pages = ['Inicio', 'Sobre Nosotros', 'Servicios'];
 
-
 function ResponsiveAppBar() {
+    const [mounted, setMounted] = React.useState(false);
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null; 
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -38,7 +39,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: '#34a33a' }}>
+        <AppBar position="static" sx={{ backgroundColor: '#16a34a' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <div
@@ -66,7 +67,6 @@ function ResponsiveAppBar() {
                         />
                     </div>
 
-
                     <Typography
                         variant="h6"
                         noWrap
@@ -85,26 +85,6 @@ function ResponsiveAppBar() {
                         San Jose
                     </Typography>
 
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: "'Poppins', sans-serif",
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                            fontSize: '1.5rem',
-                            boxShadow: '0 6px 8px rgba(0, 0, 0, 0.1)',
-                        }}
-                    >
-                        San Jose
-                    </Typography>
                     <Box
                         sx={{
                             flexGrow: 1,
@@ -127,24 +107,24 @@ function ResponsiveAppBar() {
                                     fontFamily: "'Poppins', sans-serif",
                                     fontWeight: 50,
                                     fontSize: '0.95rem',
-                                    textDecoration: 'none', 
-                                    position: 'relative', 
-                                    transition: 'color 0.4s ease', 
+                                    textDecoration: 'none',
+                                    position: 'relative',
+                                    transition: 'color 0.4s ease',
                                     '&:hover': {
-                                        color: 'yellow', 
+                                        color: 'yellow',
                                     },
                                     '&:after': {
-                                        content: "''", 
+                                        content: "''",
                                         position: 'absolute',
-                                        bottom: 0, 
+                                        bottom: 0,
                                         left: 0,
-                                        width: '0%', 
-                                        height: '4px', 
+                                        width: '0%',
+                                        height: '4px',
                                         backgroundColor: 'yellow',
-                                        transition: 'width 0.4s ease', 
+                                        transition: 'width 0.4s ease',
                                     },
                                     '&:hover::after': {
-                                        width: '100%', 
+                                        width: '100%',
                                     },
                                 }}
                             >
@@ -154,7 +134,22 @@ function ResponsiveAppBar() {
                     </Box>
                 </Toolbar>
             </Container>
+
+            {/* Dropdown Menus */}
+            <Menu anchorEl={anchorElNav} open={Boolean(anchorElNav)} onClose={handleCloseNavMenu}>
+                {pages.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                        {page}
+                    </MenuItem>
+                ))}
+            </Menu>
+
+            <Menu anchorEl={anchorElUser} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
+                <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+                <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
+            </Menu>
         </AppBar>
     );
 }
+
 export default ResponsiveAppBar;
