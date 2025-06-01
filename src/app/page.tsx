@@ -15,7 +15,7 @@ import Footer from "../../components/footer";
 export default function Home() {
   return (
     <div className="bg-gray-100">
-        <ResponsiveAppBar />
+      
         <Banner />
         <AcademicOffer/>
         <Information/>
@@ -23,7 +23,7 @@ export default function Home() {
         <NewsSection/>
         <DateCalendarServerRequest/>
         <StayConnected/>
-        <Footer/>
+     
     </div>
   );
 }
