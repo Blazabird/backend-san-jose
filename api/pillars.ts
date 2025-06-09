@@ -1,5 +1,8 @@
 // src/api/pillars.ts
 import { fetchFileUrl } from "./images";
+import dotenv from "dotenv";
+
+let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
 
 export interface Pillar {
   id: number;
@@ -10,7 +13,7 @@ export interface Pillar {
 
 export const fetchPillarsByLevelId = async (levelId: string): Promise<Pillar[]> => {
   try {
-    const response = await fetch(`http://localhost:1500/api/pillars?filters[level][id][$eq]=${levelId}&populate=*`);
+    const response = await fetch(`${apiDomain}/api/pillars?filters[level][id][$eq]=${levelId}&populate=*`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

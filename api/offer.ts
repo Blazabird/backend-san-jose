@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
+
 export interface AcademicOffer {
   id: number;
   title: string;
@@ -30,7 +34,7 @@ export const fetchAcademicOffer = async (): Promise<AcademicOffer | null> => {
       return JSON.parse(cachedData);
     }
 
-    const response = await fetch('http://localhost:1500/api/academic-offer?populate=*');
+    const response = await fetch(`${apiDomain}/api/academic-offer?populate=*`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -60,7 +64,7 @@ export const fetchCharacteristics = async (): Promise<Characteristic[] | null> =
       return JSON.parse(cachedData);
     }
 
-    const response = await fetch('http://localhost:1500/api/characteristics');
+    const response = await fetch(`${apiDomain}/api/characteristics`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

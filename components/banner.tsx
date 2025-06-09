@@ -4,8 +4,9 @@ import { fetchBannerData } from "../api/banner";
 import Alert from "@mui/material/Alert";
 import { CircularProgress } from "@mui/material";
 import { Volume2, VolumeX, Pause, Play } from "lucide-react";
+import dotenv from "dotenv";
 
-const STRAPI_BASE = "http://localhost:1500";
+const STRAPI_BASE = process.env.NEXT_PUBLIC_API_DOMAIN;
 const FALLBACK_IMAGE = "/images/fallback.jpg";
 
 const Banner: React.FC = () => {
@@ -42,6 +43,14 @@ const Banner: React.FC = () => {
         }
       } catch {
         setError("Error al conectar con el servidor");
+
+        // Set fallback data so the banner can still render
+        setBannerData({
+          data: {
+            main: "Bienvenido al corazón de San Jose",
+            description: "Explora el carisma salesiano.",
+          },
+        });
       } finally {
         setLoading(false);
       }
@@ -62,7 +71,7 @@ const Banner: React.FC = () => {
         .play()
         .then(() => setIsPlaying(true))
         .catch((err) => {
-          console.warn("Autoplay failed:", err);
+          console.warn("Error de Autoplay:", err);
           setIsPlaying(false);
         });
     };
@@ -112,10 +121,6 @@ const Banner: React.FC = () => {
     );
   }
 
-  if (error) {
-    return <Alert severity="error">{error}</Alert>;
-  }
-
   const isVideo = Boolean(videoUrl);
 
   return (
@@ -124,13 +129,19 @@ const Banner: React.FC = () => {
       style={
         !isVideo
           ? {
-              backgroundImage: `url(${FALLBACK_IMAGE})`,
+             backgroundImage: `url('/fallback.jpg')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }
           : {}
       }
     >
+      {error && (
+        <div className="absolute top-4 left-4 z-30 max-w-sm">
+          <Alert severity="error">{error}</Alert>
+        </div>
+      )}
+
       {isVideo && (
         <>
           <video

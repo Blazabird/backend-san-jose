@@ -1,6 +1,11 @@
+
+import dotenv from "dotenv";
+
+let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
+
 export const fetchNews = async () => {
   try {
-    const response = await fetch("http://localhost:1500/api/news?populate=*", {
+    const response = await fetch(`${apiDomain}/api/news?populate=*`, {
       method: "GET",
     });
 
@@ -9,7 +14,7 @@ export const fetchNews = async () => {
     }
 
     const responseData = await response.json();
-    const baseURL = "http://localhost:1500"; 
+    const baseURL = process.env.NEXT_PUBLIC_API_DOMAIN; 
 
     // Sorting the news articles by date (newest first)
     const sortedNews = responseData.data

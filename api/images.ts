@@ -7,10 +7,10 @@
  */
 export const fetchFileUrl = async (fileData: any): Promise<string> => {
   try {
-    // Base URL for constructing the full image URL (replace with your API's base URL)
-    const baseUrl = process.env.NEXT_PUBLIC_API_HOST;
+    
+    const baseUrl = process.env.NEXT_PUBLIC_API_DOMAIN;
 
-    // Check if the thumbnail URL exists, otherwise use the full URL
+    
     const fullImageUrl =
       fileData?.formats?.thumbnail?.url
         ? `${baseUrl}${fileData.formats.thumbnail.url}`
@@ -29,15 +29,15 @@ export const fetchFileUrl = async (fileData: any): Promise<string> => {
  */
 export const fetchLargeImageUrl = async (fileData: any): Promise<string> => {
   try {
-    // Base URL for constructing the full image URL (replace with your API's base URL)
-    const baseUrl = process.env.NEXT_PUBLIC_API_HOST;
 
-    // Check if the large image URL exists, otherwise fallback to the original URL
+    const baseUrl = process.env.NEXT_PUBLIC_API_DOMAIN;
+
+  
     if (fileData?.formats?.large?.url) {
       return `${baseUrl}${fileData.formats.large.url}`;
     }
 
-    // If no large image, fallback to the original URL
+   
     return `${baseUrl}${fileData.url}`;
   } catch (error: any) {
     throw new Error(error.message || "An error occurred while fetching the large image URL");

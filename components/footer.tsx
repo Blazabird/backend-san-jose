@@ -8,7 +8,7 @@ export default function Footer() {
         {/* Contact Info */}
         <div>
           <h1 className="text-2xl font-bold mb-1 font-poppins">Colegio San Jose</h1>
-          <h2 className="text-lg font-bold mb-4 font-poppins">La educacion es cosa del corazon</h2>
+          <h2 className="text-lg font-bold mb-4 font-poppins">La educacion es cosa del corazón</h2>
           <p className="mb-2 font-poppins">📍 123 Education Street, Learning City, Country</p>
           <p className="mb-2 font-poppins">📞 +1 (555) 123-4567</p>
           <p className="mb-4 font-poppins">✉️ contact@educationexample.com</p>
@@ -16,7 +16,7 @@ export default function Footer() {
 
         {/* Social Media */}
         <div>
-          <h3 className="text-xl font-semibold mb-4 font-poppins">Siguenos en nuestras Redes Sociales</h3>
+          <h3 className="text-xl font-semibold mb-4 font-poppins">Síguenos en nuestras Redes Sociales</h3>
           <div className="flex gap-4">
             <a
               href="https://www.facebook.com"

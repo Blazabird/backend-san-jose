@@ -30,13 +30,13 @@ export default {
         },
         breathing: {
           '0%': {
-            transform: 'scale(1) rotate(45deg)',
+            transform: 'scale(1) rotate(0deg)',
           },
           '50%': {
-            transform: 'scale(1.1) rotate(45deg)',
+            transform: 'scale(1.05) rotate(0deg)',
           },
           '100%': {
-            transform: 'scale(1) rotate(45deg)',
+            transform: 'scale(1) rotate(0deg)',
           },
         },
       },

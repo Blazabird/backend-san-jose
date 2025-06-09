@@ -3,7 +3,7 @@ export interface ImageData {
     alt: string;
   }
   
-  const BASE_URL = 'http://localhost:1500'; 
+  const BASE_URL = process.env.NEXT_PUBLIC_API_DOMAIN; 
   
   export class SliderService {
     static async fetchImages(): Promise<ImageData[]> {

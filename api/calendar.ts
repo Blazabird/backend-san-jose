@@ -1,6 +1,10 @@
+import dotenv from "dotenv";
+
+let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
+
 export async function fetchHighlightedDays(): Promise<{ [key: string]: string }> {
   try {
-    const response = await fetch('http://localhost:1500/api/events?populate=*', {
+    const response = await fetch(`${apiDomain}/api/events?populate=*'`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -24,6 +28,8 @@ export async function fetchHighlightedDays(): Promise<{ [key: string]: string }>
 
     return highlightedDays;
   } catch (error) {
+
+    console.log(`request made to: ${apiDomain} failed`)
     console.error('Failed to fetch highlighted days:', error);
     return {};
   }

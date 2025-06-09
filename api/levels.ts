@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import { fetchFileUrl } from "./images";
 
 export interface Level {
@@ -9,9 +10,11 @@ export interface Level {
   pillarDescription?: string;
 }
 
+let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
+
 export const fetchLevels = async (): Promise<Level[]> => {
   try {
-    const response = await fetch("http://localhost:1500/api/levels?populate=*");
+  const response = await fetch(`${apiDomain}/api/levels?populate=*`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -28,6 +31,7 @@ export const fetchLevels = async (): Promise<Level[]> => {
     return levels;
   } catch (error) {
     console.error("Error fetching levels:", error);
+    console.log(`request made to: ${apiDomain} failed`);
     return [];
   }
 };

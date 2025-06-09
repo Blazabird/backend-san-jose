@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
+
 export interface SliderImage {
   id: number;
   url: string;
@@ -5,7 +9,7 @@ export interface SliderImage {
 }
 
 const CACHE_KEY = "slider_images_cache";
-const CACHE_TTL = 1000 * 60 * 60 * 24 * 2; // 2 days in ms
+const CACHE_TTL = 1000 * 60 * 60 * 24 * 2; 
 
 export async function fetchSliderImages(): Promise<SliderImage[]> {
   // Try to load from cache
@@ -14,16 +18,16 @@ export async function fetchSliderImages(): Promise<SliderImage[]> {
     try {
       const parsed = JSON.parse(cached);
       if (Date.now() < parsed.expiry && Array.isArray(parsed.data)) {
-        return parsed.data.slice(0, 4); // Return first 4 from cache
+        return parsed.data.slice(0, 4);
       }
     } catch (err) {
       console.warn("Failed to parse slider cache:", err);
     }
   }
 
-  // Fetch from API
+  
   try {
-    const res = await fetch(`http://localhost:1500/api/slider?populate=Images`);
+    const res = await fetch(`${apiDomain}/api/slider?populate=Images`);
     const json = await res.json();
 
     const images = json?.data?.Images;

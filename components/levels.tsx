@@ -10,6 +10,8 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { fetchLevels, Level } from "../api/levels";
+import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
+import { red } from '@mui/material/colors';
 
 // Slugify helper
 const slugify = (text: string) =>
@@ -46,8 +48,24 @@ export default function Levels() {
 
   if (!levels.length) {
     return (
-      <div className="text-center mt-5 text-lg text-green-900">
-        No levels available.
+      <div className="bg-white pb-10 pt-10 px-6 h-[30rem] flex flex-col items-center justify-start">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-green-600">Niveles Educativos</h1>
+          <p className="text-gray-700 mt-2 max-w-xl mx-auto">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac
+            vestibulum erat.
+          </p>
+        </div>
+  
+        <div className="flex justify-center items-center">
+          <div className="border-4 animate-breathing border-red-500 rounded-lg  p-10 shadow-2xl bg-white text-center">
+            <WarningAmberRoundedIcon sx={{ fontSize: 60, color: red[500] }} />
+            <p className="mt-4 text-lg font-poppins font-medium text-red-700">
+              No hay niveles disponibles.
+            </p>
+            <p className="text-red-700 font-poppins">Por favor, intente nuevamente más tarde.</p>
+          </div>
+        </div>
       </div>
     );
   }

@@ -3,32 +3,58 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { fetchImageUrl } from "../api/information";
+import { CircularProgress } from "@mui/material";
+
+const FALLBACK_IMAGE = "/fallbackinfo.jpg"; 
 
 const ImageWithTitle: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImage = async () => {
       try {
         const url = await fetchImageUrl();
-        setImageUrl(url);
+        if (url) {
+          setImageUrl(url);
+        } else {
+          setImageUrl(FALLBACK_IMAGE);
+        }
       } catch (error) {
         console.error('Error fetching image:', error);
+        setImageUrl(FALLBACK_IMAGE);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchImage();
   }, []);
 
-  if (!imageUrl) return <div>Loading...</div>;
+  if (loading) return  <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100vw",
+    height: "100vh",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    backgroundColor: "rgba(255,255,255,0.8)",
+    zIndex: 9999,
+  }}
+>
+  <CircularProgress color="success" />
+</div>
 
   return (
     <section className="relative w-full">
       {/* Image container */}
-      <div className="relative w-full  h-[60vh]">
+      <div className="relative w-full h-[60vh]">
         {/* The image */}
         <Image
-          src={imageUrl}
+          src={imageUrl!}
           alt="Background"
           layout="fill"
           objectFit="cover"
@@ -45,7 +71,6 @@ const ImageWithTitle: React.FC = () => {
           </h1>
         </div>
       </div>
-      
     </section>
   );
 };

@@ -10,7 +10,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import '@fontsource/poppins/700.css';
 
-const pages = ['Inicio', 'Sobre Nosotros', 'Servicios'];
+const pages = ['Inicio', 'Academico', 'Inscripciones'];
 
 function ResponsiveAppBar() {
     const [mounted, setMounted] = React.useState(false);
@@ -57,7 +57,7 @@ function ResponsiveAppBar() {
                     >
                         <img
                             src="/logo.png"
-                            alt="Colegio Salesiano San Jose"
+                            alt="Colegio San Jose"
                             style={{
                                 width: '80px',
                                 height: '80px',
