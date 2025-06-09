@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { fetchNews } from "../api/news";
 import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
 import { red } from '@mui/material/colors';
+import {motion} from "framer-motion";
 
 interface NewsArticle {
   id: number;
@@ -33,21 +34,21 @@ const NewsSection = () => {
   if (loading) {
     return (
       <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100vw",
-        height: "100vh",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        backgroundColor: "rgba(255,255,255,0.8)",
-        zIndex: 9999,
-      }}
-    >
-      <CircularProgress color="success" />
-    </div>
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          backgroundColor: "rgba(255,255,255,0.8)",
+          zIndex: 9999,
+        }}
+      >
+        <CircularProgress color="success" />
+      </div>
     );
   }
 
@@ -69,11 +70,10 @@ const NewsSection = () => {
                 <li
                   key={article.id}
                   onClick={() => setSelectedNews(article)}
-                  className={`cursor-pointer px-4 py-2 rounded-md transition ${
-                    selectedNews?.id === article.id
+                  className={`cursor-pointer px-4 py-2 rounded-md transition ${selectedNews?.id === article.id
                       ? "bg-green-500 text-white"
                       : "hover:bg-gray-100 text-gray-700"
-                  }`}
+                    }`}
                 >
                   {article.title}
                 </li>
@@ -114,15 +114,19 @@ const NewsSection = () => {
               </div>
             </div>
           ) : (
-            <div className="flex justify-center items-center">
-          <div className="border-4 animate-breathing border-red-500 rounded-lg  p-10 shadow-2xl bg-white text-center">
-            <WarningAmberRoundedIcon sx={{ fontSize: 60, color: red[500] }} />
-            <p className="mt-4 text-lg font-poppins font-medium text-red-700">
-              No hay Noticias disponibles.
-            </p>
-            <p className="text-red-700 font-poppins">Por favor, intente nuevamente más tarde.</p>
-          </div>
-        </div>
+            <motion.div
+              className="flex justify-center items-center"
+              whileHover={{ scale: 1.2 }}
+
+            >
+              <div className="border-4 border-red-500 rounded-lg p-10 shadow-2xl bg-white text-center">
+                <WarningAmberRoundedIcon sx={{ fontSize: 60, color: red[500] }} />
+                <p className="mt-4 text-lg font-poppins font-medium text-red-700">
+                  No hay noticias disponibles.
+                </p>
+                <p className="text-red-700 font-poppins">Por favor, intente nuevamente más tarde.</p>
+              </div>
+            </motion.div>
           )}
         </div>
       </div>

@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "motion/react"
 import React, { useEffect, useState, useRef } from "react";
 import { fetchBannerData } from "../api/banner";
 import Alert from "@mui/material/Alert";
@@ -129,10 +130,10 @@ const Banner: React.FC = () => {
       style={
         !isVideo
           ? {
-             backgroundImage: `url('/fallback.jpg')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }
+            backgroundImage: `url('/fallback.jpg')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }
           : {}
       }
     >
@@ -207,10 +208,15 @@ const Banner: React.FC = () => {
               {bannerData.data.description}
             </p>
             <div className="mt-8">
-              <button className="relative overflow-hidden px-10 py-2 bg-green-600 text-white font-medium text-sm md:text-base rounded-lg shadow-md group">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onHoverStart={() => console.log('hover started!')}
+                className="relative overflow-hidden px-10 py-2 bg-green-600 text-white font-medium text-sm md:text-base rounded-lg shadow-md group"
+              >
                 <span className="absolute inset-0 bg-green-700 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
                 <span className="relative z-10 text-lg font-bold">Ver Más</span>
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>

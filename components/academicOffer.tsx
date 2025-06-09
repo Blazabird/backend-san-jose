@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { motion } from "motion/react"
 import dotenv from "dotenv";
 import {
   fetchAcademicOffer,
@@ -121,9 +122,10 @@ const OfertaAcademica: React.FC = () => {
         {/* Left side */}
         <div className="flex flex-col mt-24 text-left px-4 mr-5 h-full items-center">
           {leftSide.map((item, index) => (
-            <div
+            <motion.div
               key={item.id}
               className={`w-full max-w-sm relative group ${index === 1 ? "mt-28" : ""}`}
+              whileHover={{ scale: 1.2 }}
             >
               <div className="absolute left-0 top-0 bottom-8 w-1 bg-yellow-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
 
@@ -137,16 +139,19 @@ const OfertaAcademica: React.FC = () => {
               </div>
 
               <div className="flex justify-start pl-4 absolute bottom-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-full group-hover:translate-y-0">
-                <a
-                  href="/learn-more"
-                  className="text-yellow-600 font-semibold text-lg hover:text-yellow-700 transition-colors duration-300"
-                >
-                  Leer más
-                </a>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onHoverStart={() => console.log('hover started!')}
+                className="relative mt-8 overflow-hidden px-4 py-1 bg-transparent text-white font-medium text-sm md:text-base rounded-lg shadow-md group"
+              >
+                <span className="absolute inset-0 bg-yellow-500 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+                <span className="relative z-10 text-sm font-bold font-poppins text-black">Leer Mas</span>
+              </motion.button>
               </div>
 
               <div className="w-full border-2 border-gray-300 mt-6" />
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -171,9 +176,10 @@ const OfertaAcademica: React.FC = () => {
         {/* Right side */}
         <div className="flex flex-col mt-24 text-left px-4 ml-5 h-full items-center">
           {rightSide.map((item, index) => (
-            <div
+            <motion.div
               key={item.id}
               className={`w-full max-w-sm relative group ${index === 1 ? "mt-28" : ""}`}
+              whileHover={{ scale: 1.2 }}
             >
               <div className="absolute left-0 top-0 bottom-8 w-1 bg-yellow-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
 
@@ -187,16 +193,19 @@ const OfertaAcademica: React.FC = () => {
               </div>
 
               <div className="flex justify-start pl-4 absolute bottom-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-full group-hover:translate-y-0">
-                <a
-                  href="/learn-more"
-                  className="text-yellow-600 font-semibold text-lg hover:text-yellow-700 transition-colors duration-300"
-                >
-                  Leer más
-                </a>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onHoverStart={() => console.log('hover started!')}
+                className="relative mt-8 overflow-hidden px-4 py-1 bg-transparent text-white font-medium text-sm md:text-base rounded-lg shadow-md group"
+              >
+                <span className="absolute inset-0 bg-yellow-500 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+                <span className="relative z-10 text-sm font-bold font-poppins text-black">Leer Mas</span>
+              </motion.button>
               </div>
 
               <div className="w-full border-2 border-gray-300 mt-6" />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

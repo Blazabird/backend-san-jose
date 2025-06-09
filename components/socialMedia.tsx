@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import dotenv from "dotenv";
 import {
   FaFacebookF,
   FaXTwitter,
@@ -9,6 +10,8 @@ import {
   FaThreads,
 } from "react-icons/fa6";
 import { fetchSliderImages, SliderImage } from "../api/socialMedia";
+
+let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
 
 export default function StayConnected() {
   const [images, setImages] = useState<SliderImage[]>([]);
@@ -27,12 +30,12 @@ export default function StayConnected() {
           </h2>
           <p className="text-black text-lg mb-8 max-w-md">
             En nuestra seccion de noticias y redes sociales encontraras lo mas
-            nuevo del Colegio. Mantente al conectando con la institucion!
+            nuevo del Colegio. Mantente al conectando con la institución!
           </p>
 
           <div>
             <p className="font-semibold mb-3 text-yellow-600 uppercase text-base font-poppins">
-              Encuentranos en:
+              Encuéntranos en:
             </p>
             <div className="grid grid-cols-3 gap-4 w-48">
               <SocialIcon href="https://facebook.com" icon={<FaFacebookF />} label="Facebook" />
@@ -49,7 +52,7 @@ export default function StayConnected() {
         <div className="grid grid-cols-2 gap-4">
           {images.map((item) => {
             const imageUrl = item.url.startsWith("/")
-              ? `http://localhost:1500${item.url}`
+              ? `${apiDomain}${item.url}`
               : item.url;
 
             return (

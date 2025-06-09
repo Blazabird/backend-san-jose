@@ -12,6 +12,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { fetchLevels, Level } from "../api/levels";
 import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
 import { red } from '@mui/material/colors';
+import { motion } from "framer-motion";
 
 // Slugify helper
 const slugify = (text: string) =>
@@ -56,16 +57,20 @@ export default function Levels() {
             vestibulum erat.
           </p>
         </div>
-  
-        <div className="flex justify-center items-center">
-          <div className="border-4 animate-breathing border-red-500 rounded-lg  p-10 shadow-2xl bg-white text-center">
+
+        <motion.div
+          className="flex justify-center items-center"
+          whileHover={{ scale: 1.2 }}
+          
+        >
+          <div className="border-4 border-red-500 rounded-lg p-10 shadow-2xl bg-white text-center">
             <WarningAmberRoundedIcon sx={{ fontSize: 60, color: red[500] }} />
             <p className="mt-4 text-lg font-poppins font-medium text-red-700">
               No hay niveles disponibles.
             </p>
             <p className="text-red-700 font-poppins">Por favor, intente nuevamente más tarde.</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     );
   }
