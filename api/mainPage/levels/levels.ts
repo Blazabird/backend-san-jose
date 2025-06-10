@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { fetchFileUrl } from "./images";
+import { fetchFileUrl } from "../../imageFetcher/images";
 
 export interface Level {
   id: number;

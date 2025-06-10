@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
-import { fetchLevels, Level } from "../../../api/levels";
+import { fetchLevels, Level } from "../../../api/mainPage/levels/levels";
 import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
 import { red } from '@mui/material/colors';
 import { motion } from "framer-motion";

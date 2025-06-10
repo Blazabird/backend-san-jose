@@ -8,7 +8,7 @@ import {
   fetchCharacteristics,
   AcademicOffer,
   Characteristic,
-} from "../../../api/offer";
+} from "../../../api/mainPage/welcomeSection/offer";
 import Image from "next/image";
 import { CircularProgress } from "@mui/material";
 

@@ -9,7 +9,7 @@ import {
   FaInstagram,
   FaThreads,
 } from "react-icons/fa6";
-import { fetchSliderImages, SliderImage } from "../../../api/socialMedia";
+import { fetchSliderImages, SliderImage } from "../../../api/mainPage/socialMediaSection/socialMedia";
 
 let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
 

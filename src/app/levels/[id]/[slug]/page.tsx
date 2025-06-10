@@ -1,7 +1,7 @@
 // src/app/levels/[id]/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { fetchLevels } from "../../../../../api/levels";
+import { fetchLevels } from "../../../../../api/mainPage/levels";
 import { fetchPillarsByLevelId } from "../../../../../api/pillars";
 
 export default async function LevelPage(props: { params: Promise<{ id: string; slug: string }> }) {
