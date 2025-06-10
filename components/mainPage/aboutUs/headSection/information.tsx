@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { fetchImageUrl } from "../../../../api/mainPage/aboutUs/information";
 import { CircularProgress } from "@mui/material";
+import {motion} from "framer-motion";
 
 const FALLBACK_IMAGE = "/fallbackinfo.jpg"; 
 
@@ -51,7 +52,7 @@ const ImageWithTitle: React.FC = () => {
   return (
     <section className="relative w-full">
       {/* Image container */}
-      <div className="relative w-full h-[60vh]">
+      <motion.div className="relative w-full h-[60vh]"  whileInView={{ opacity: 1, x:'0vw' }} initial = {{opacity: 0, x:'-25vw'}} transition= {{duration: 0.5}}>
         {/* The image */}
         <Image
           src={imageUrl!}
@@ -70,7 +71,7 @@ const ImageWithTitle: React.FC = () => {
             ¡Conócenos!
           </h1>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "motion/react"
+import { motion } from "framer-motion";
 import React, { useEffect, useState, useRef } from "react";
 import { fetchBannerData } from "../../../api/mainPage/banner/banner";
 import Alert from "@mui/material/Alert";
@@ -186,8 +186,8 @@ const Banner: React.FC = () => {
 
       {!isVideo && bannerData && (
         <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start text-center md:text-left h-full px-6 md:px-20 lg:px-36 py-20">
-          <div className="md:w-1/2 bg-white bg-opacity-85 p-6 rounded-2xl shadow-2xl -ml-16">
-            <p className="text-green-600 uppercase font-semibold tracking-wide text-sm md:text-base mb-4 mt-24">
+          <motion.div className="md:w-1/2 bg-white bg-opacity-85 p-6 rounded-2xl shadow-2xl -ml-16"  whileInView={{ opacity: 0.85 , y:'0vw' }} initial= {{opacity: 0 , y:'-10vw'}} transition={{ duration: 0.5 }}>
+            <p  className="text-green-600 uppercase font-semibold tracking-wide text-sm md:text-base mb-4 mt-24">
               San Jose
             </p>
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -218,7 +218,7 @@ const Banner: React.FC = () => {
                 <span className="relative z-10 text-lg font-bold">Ver Más</span>
               </motion.button>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>

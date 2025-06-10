@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import '@fontsource/poppins/700.css';
+import {motion} from "framer-motion";
 
 const pages = ['Inicio', 'Academico', 'Inscripciones'];
 

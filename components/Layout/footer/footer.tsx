@@ -1,5 +1,8 @@
+"use client"
+
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -8,7 +11,7 @@ export default function Footer() {
         {/* Contact Info */}
         <div>
           <h1 className="text-2xl font-bold mb-1 font-poppins">Colegio San Jose</h1>
-          <h2 className="text-lg font-bold mb-4 font-poppins">La educacion es cosa del corazón</h2>
+          <h2 className="text-lg font-bold mb-4 font-poppins">La educación es cosa del corazón</h2>
           <p className="mb-2 font-poppins">📍 123 Education Street, Learning City, Country</p>
           <p className="mb-2 font-poppins">📞 +1 (555) 123-4567</p>
           <p className="mb-4 font-poppins">✉️ contact@educationexample.com</p>
@@ -18,7 +21,9 @@ export default function Footer() {
         <div>
           <h3 className="text-xl font-semibold mb-4 font-poppins">Síguenos en nuestras Redes Sociales</h3>
           <div className="flex gap-4">
-            <a
+            <motion.a
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.95 }}
               href="https://www.facebook.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -26,8 +31,11 @@ export default function Footer() {
               aria-label="Facebook"
             >
               <FaFacebookF />
-            </a>
-            <a
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.95 }}
               href="https://www.twitter.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -35,8 +43,11 @@ export default function Footer() {
               aria-label="Twitter"
             >
               <FaTwitter />
-            </a>
-            <a
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.95 }}
               href="https://www.instagram.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -44,8 +55,11 @@ export default function Footer() {
               aria-label="Instagram"
             >
               <FaInstagram />
-            </a>
-            <a
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.95 }}
               href="https://www.linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -53,7 +67,7 @@ export default function Footer() {
               aria-label="LinkedIn"
             >
               <FaLinkedinIn />
-            </a>
+            </motion.a>
           </div>
         </div>
       </div>

@@ -6,6 +6,8 @@ import { fetchNews } from "../../../../api/mainPage/newsSection/news/news";
 import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
 import { red } from '@mui/material/colors';
 import {motion} from "framer-motion";
+import LoadingCircleSpinner from "../../../loading/loadingcircle";
+import LoadingThreeDotsPulse from "../../../loading/loading";
 
 interface NewsArticle {
   id: number;
@@ -33,21 +35,8 @@ const NewsSection = () => {
 
   if (loading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100vw",
-          height: "100vh",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          backgroundColor: "rgba(255,255,255,0.8)",
-          zIndex: 9999,
-        }}
-      >
-        <CircularProgress color="success" />
+      <div>
+        <LoadingThreeDotsPulse/>
       </div>
     );
   }

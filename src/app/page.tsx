@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ResponsiveAppBar from "../../components/Layout/navbar";
+import ResponsiveAppBar from "../../components/Layout/navbar/navbar";
 import Banner from "../../components/MainPage/banner/banner";
 import Levels from "../../components/MainPage/levels/levels";
 import AcademicOffer  from "../../components/MainPage/welcomeMessage/academicOffer";
@@ -7,7 +7,8 @@ import DateCalendarServerRequest from "../../components/MainPage/newsSection/eve
 import NewsSection from "../../components/MainPage/newsSection/news/news";
 import Information from "../../components/MainPage/aboutUs/headSection/information"
 import StayConnected from "../../components/MainPage/socialMediaSection/socialMedia"
-import Footer from "../../components/Layout/footer";
+import Footer from "../../components/Layout/footer/footer";
+
 
 
 

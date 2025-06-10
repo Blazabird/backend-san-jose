@@ -11,6 +11,7 @@ import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import { fetchHighlightedDays } from '../../../../api/mainPage/newsSection/events/calendar'; 
+import {motion} from "framer-motion";
 
 dayjs.locale('es');  
 
@@ -79,6 +80,7 @@ export default function DateCalendarServerRequest() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es"> 
+    <motion.div whileHover={{ scale: 1.1 }}>
       <DateCalendar
         loading={isLoading}
         renderLoading={() => <DayCalendarSkeleton />}
@@ -115,6 +117,7 @@ export default function DateCalendarServerRequest() {
           <p>Fecha: {selectedEvent?.date}</p>
         </div>
       </Dialog>
+      </motion.div>
     </LocalizationProvider>
   );
 }

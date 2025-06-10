@@ -12,6 +12,7 @@ import {
 import Image from "next/image";
 import { CircularProgress } from "@mui/material";
 
+
 const FALLBACK_IMAGE = "/fallback.jpg"; 
 let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
 
@@ -109,23 +110,24 @@ const OfertaAcademica: React.FC = () => {
 
   return (
     <section className="py-16 px-4 text-center">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold font-poppins text-green-600 uppercase tracking-widest mb-8">
+      <motion.div  whileInView={{ opacity: 1, y:'0vw' }} initial = {{opacity: 0, y:'15vw'}} transition= {{duration: 0.5}} className="max-w-7xl mx-auto">
+        <h2   className="text-4xl font-bold font-poppins text-green-600 uppercase tracking-widest mb-8">
           {academicOffer.title}
         </h2>
-        <p className="text-lg text-black font-poppins font-bold mb-24 max-w-7xl mx-auto">
+        <p  className="text-lg text-black font-poppins font-bold mb-24 max-w-7xl mx-auto">
           {academicOffer.description}
         </p>
-      </div>
+      </motion.div>
 
       <div className="flex flex-col-reverse md:grid md:grid-cols-3 m-10 gap-10 md:gap-20 items-stretch">
         {/* Left side */}
-        <div className="flex flex-col mt-24 text-left px-4 mr-5 h-full items-center">
+        <motion.div className="flex flex-col mt-24 text-left px-4 mr-5 h-full items-center"  whileInView={{ opacity: 1, x:'0vw' }}  initial = {{opacity: 0, x:'-15vw'}} transition= {{duration: 0.5}}>
           {leftSide.map((item, index) => (
             <motion.div
               key={item.id}
               className={`w-full max-w-sm relative group ${index === 1 ? "mt-28" : ""}`}
               whileHover={{ scale: 1.2 }}
+             
             >
               <div className="absolute left-0 top-0 bottom-8 w-1 bg-yellow-600 opacity-0 group-hover:opacity-100 transition-all duration-300" />
 
@@ -153,10 +155,10 @@ const OfertaAcademica: React.FC = () => {
               <div className="w-full border-2 border-gray-300 mt-6" />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Middle image */}
-        <div className="flex justify-center items-center px-1 my-10 md:my-0">
+        <motion.div  whileInView={{ opacity: 1, y:'0vw' }} initial = {{opacity: 0, y:'7vw'}} transition= {{duration: 0.5}} className="flex justify-center items-center px-1 my-10 md:my-0">
           <div className="relative w-[28rem] h-[28rem] md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem]">
             <Image
               src={
@@ -171,10 +173,10 @@ const OfertaAcademica: React.FC = () => {
               className="object-cover rounded-full border-8 border-yellow-500 shadow-lg"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Right side */}
-        <div className="flex flex-col mt-24 text-left px-4 ml-5 h-full items-center">
+        <motion.div className="flex flex-col mt-24 text-left px-4 ml-5 h-full items-center"  whileInView={{ opacity: 1, x:'0vw' }} initial = {{opacity: 0, x:'10vw'}} transition= {{duration: 0.5}}>
           {rightSide.map((item, index) => (
             <motion.div
               key={item.id}
@@ -207,7 +209,7 @@ const OfertaAcademica: React.FC = () => {
               <div className="w-full border-2 border-gray-300 mt-6" />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
