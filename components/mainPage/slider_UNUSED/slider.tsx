@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { SliderService, ImageData } from "../api/slider";
+import { SliderService, ImageData } from "../../../api/slider";
+import { CircularProgress } from "@mui/material";
 
 const ImageSlider: React.FC = () => {
   const [images, setImages] = useState<ImageData[]>([]);
@@ -84,7 +85,22 @@ const ImageSlider: React.FC = () => {
             </div>
           </>
         ) : (
-          <p className="text-center py-10">Loading images...</p>
+          <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          backgroundColor: "rgba(255,255,255,0.8)",
+          zIndex: 9999,
+        }}
+      >
+        <CircularProgress color="success" />
+        </div>
         )}
       </div>
     </div>

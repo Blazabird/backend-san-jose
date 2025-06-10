@@ -1,8 +1,8 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import ResponsiveAppBar from "../../components/navbar";
-import Footer from "../../components/footer";
+import ResponsiveAppBar from "../../components/Layout/navbar";
+import Footer from "../../components/Layout/footer";
 import "./globals.css";
 
 const geistSans = Geist({

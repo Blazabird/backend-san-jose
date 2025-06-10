@@ -10,7 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
-import { fetchHighlightedDays } from '../api/calendar'; 
+import { fetchHighlightedDays } from '../../../../api/calendar'; 
 
 dayjs.locale('es');  
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { fetchImageUrl } from "../api/information";
+import { fetchImageUrl } from "../../../../api/information";
 import { CircularProgress } from "@mui/material";
 
 const FALLBACK_IMAGE = "/fallbackinfo.jpg"; 

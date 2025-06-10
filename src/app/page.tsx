@@ -1,14 +1,13 @@
 import Image from "next/image";
-import ResponsiveAppBar from "../../components/navbar";
-import Banner from "../../components/banner";
-import CustomTabPanel from "../../components/selector";
-import Levels from "../../components/levels";
-import AcademicOffer  from "../../components/academicOffer";
-import DateCalendarServerRequest from "../../components/calendar";
-import NewsSection from "../../components/news";
-import Information from "../../components/information"
-import StayConnected from "../../components/socialMedia"
-import Footer from "../../components/footer";
+import ResponsiveAppBar from "../../components/Layout/navbar";
+import Banner from "../../components/mainPage/banner/banner";
+import Levels from "../../components/mainPage/levels/levels";
+import AcademicOffer  from "../../components/mainPage/welcomeMessage/academicOffer";
+import DateCalendarServerRequest from "../../components/mainPage/newsSection/events/calendar";
+import NewsSection from "../../components/mainPage/newsSection/news/news";
+import Information from "../../components/mainPage/aboutUs/headSection/information"
+import StayConnected from "../../components/mainPage/socialMediaSection/socialMedia"
+import Footer from "../../components/Layout/footer";
 
 
 

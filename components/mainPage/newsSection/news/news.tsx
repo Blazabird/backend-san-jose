@@ -2,7 +2,7 @@
 
 import { CircularProgress } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { fetchNews } from "../api/news";
+import { fetchNews } from "../../../../api/news";
 import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
 import { red } from '@mui/material/colors';
 import {motion} from "framer-motion";

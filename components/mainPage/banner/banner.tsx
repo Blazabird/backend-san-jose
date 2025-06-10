@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "motion/react"
 import React, { useEffect, useState, useRef } from "react";
-import { fetchBannerData } from "../api/banner";
+import { fetchBannerData } from "../../../api/banner";
 import Alert from "@mui/material/Alert";
 import { CircularProgress } from "@mui/material";
 import { Volume2, VolumeX, Pause, Play } from "lucide-react";
