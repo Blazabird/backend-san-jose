@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { fetchImageUrl } from "../../../../api/mainPage/aboutUs/information";
+import { fetchImageUrl } from "../../../../api/MainPage/aboutUs/information";
 import { CircularProgress } from "@mui/material";
 import {motion} from "framer-motion";
 

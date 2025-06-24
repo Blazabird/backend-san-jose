@@ -9,7 +9,7 @@ import {
   FaInstagram,
   FaThreads,
 } from "react-icons/fa6";
-import { fetchSliderImages, SliderImage } from "../../../api/mainPage/socialMediaSection/socialMedia";
+import { fetchSliderImages, SliderImage } from "../../../api/MainPage/socialMediaSection/socialMedia";
 import {motion} from "framer-motion"
 
 let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
@@ -41,7 +41,7 @@ export default function StayConnected() {
             <div className="grid grid-cols-3 gap-4 w-48">
 
               <motion.button whileHover={{ scale: 1.2 }}  whileTap={{ scale: 0.95 }}>
-              <SocialIcon href="https://facebook.com" icon={<FaFacebookF />} label="Facebook" />
+              <SocialIcon href="https://www.facebook.com/CSSJSA/" icon={<FaFacebookF />} label="Facebook" />
               </motion.button>
 
               <motion.button whileHover={{ scale: 1.2 }}  whileTap={{ scale: 0.95 }}>
@@ -57,7 +57,7 @@ export default function StayConnected() {
                 </motion.button>
 
                 <motion.button whileHover={{ scale: 1.2 }}  whileTap={{ scale: 0.95 }}>
-                <SocialIcon href="https://instagram.com" icon={<FaInstagram />} label="Instagram" />
+                <SocialIcon href="https://www.instagram.com/cssj_sv/?hl=es" icon={<FaInstagram />} label="Instagram" />
                 </motion.button>
 
                 <motion.button whileHover={{ scale: 1.2 }}  whileTap={{ scale: 0.95 }}>

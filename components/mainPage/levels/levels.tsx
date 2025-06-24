@@ -1,18 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
-import Grid from "@mui/material/Grid";
 import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
+import Grid from "@mui/material/Grid";
 import { red } from "@mui/material/colors";
 import { motion } from "framer-motion";
 import LoadingCircleSpinner from "../../loading/loadingcircle";
-import { fetchLevels, Level } from "../../../api/mainPage/levels/levels";
+import { fetchLevels, Level } from "../../../api/MainPage/levels/levels";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 const dummyLevels: Level[] = [
   {
@@ -56,7 +58,6 @@ const dummyLevels: Level[] = [
     pillarDescription: "yes",
   },
 ];
-
 // Slugify helper
 const slugify = (text: string) =>
   text
@@ -70,18 +71,38 @@ const slugify = (text: string) =>
 export default function Levels() {
   const [levels, setLevels] = useState<Level[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [showScrollButtons, setShowScrollButtons] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const getLevels = async () => {
-       //const data = await fetchLevels();
       const data = dummyLevels;
       setLevels(data);
       setLoading(false);
     };
-
     getLevels();
   }, []);
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      const el = scrollContainerRef.current;
+      if (el) {
+        setShowScrollButtons(el.scrollWidth > el.clientWidth);
+      }
+    };
+    checkOverflow();
+    window.addEventListener("resize", checkOverflow);
+    return () => window.removeEventListener("resize", checkOverflow);
+  }, [levels]);
+
+  const scrollByAmount = 300;
+  const scrollLeft = () => {
+    scrollContainerRef.current?.scrollBy({ left: -scrollByAmount, behavior: "smooth" });
+  };
+  const scrollRight = () => {
+    scrollContainerRef.current?.scrollBy({ left: scrollByAmount, behavior: "smooth" });
+  };
 
   if (loading) {
     return (
@@ -93,11 +114,10 @@ export default function Levels() {
 
   if (!levels.length) {
     return (
-      <div className="bg-white pb-10 pt-10 px-6 h-[30rem] flex flex-col items-center justify-start">
+      <div className="bg-white pb-10 pt-10 px-6 h-[30rem] bg-gray-300 flex flex-col items-center justify-start">
         <motion.div
           className="text-center mb-8"
           whileInView={{ opacity: 1, y: "0vw" }}
-          viewport={{ once: true }}
           initial={{ opacity: 0, y: "25vw" }}
           transition={{ duration: 0.5 }}
         >
@@ -126,50 +146,72 @@ export default function Levels() {
     );
   }
 
-  
   return (
-    <div className="bg-white pb-10 pt-10 px-6 overflow:hidden">
-      <motion.div
-        className="text-center mb-8"
-        whileInView={{ opacity: 1, y: "0vw" }}
-      
-        initial={{ opacity: 0, y: "25vw" }}
-        transition={{ duration: 0.3 }}
-      >
-        <h1 className="text-4xl font-bold text-green-600">Niveles Educativos</h1>
-        <p className="text-gray-700 mt-2 max-w-xl mx-auto">
+    <div className="relative bg-gray-100 pb-10 pt-10 px-6 overflow-hidden">
+      <motion.div className="text-center mb-8" initial={{ opacity: 0, y: "5vw" }} whileInView={{ opacity: 1, y: "0vw" }} transition={{ duration: 0.3 }}>
+        <h1 className="text-4xl font-bold font-poppins text-green-600">Niveles Educativos</h1>
+        <p className="text-black font-poppins mt-2 max-w-xl mx-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac vestibulum erat.
         </p>
       </motion.div>
 
-      <Grid container spacing={4} justifyContent="center" sx={{ maxWidth: "1600px", margin: "0 auto" }}>
+      {showScrollButtons && (
+        <>
+          <button
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-green-700 text-white p-2 rounded-full shadow-md hover:bg-green-800 transition"
+            onClick={scrollLeft}
+          >
+            <ArrowBackIosNewRoundedIcon fontSize="small" />
+          </button>
+          <button
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-green-700 text-white p-2 rounded-full shadow-md hover:bg-green-800 transition"
+            onClick={scrollRight}
+          >
+            <ArrowForwardIosRoundedIcon fontSize="small" />
+          </button>
+        </>
+      )}
+
+      <div
+        ref={scrollContainerRef}
+        className="relative flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth px-4 py-4"
+        style={{
+          scrollBehavior: "smooth",
+          paddingBottom: "2rem",         
+          overflowY: "hidden",           
+          marginBottom: "-16px"          
+        }}
+      >
         {levels.map((item, index) => {
           const fromAbove = index % 2 === 0;
 
           return (
-            <Grid item xs={12} sm={6} md={4} lg={2.4} xl={2} key={item.id}>
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: fromAbove ? "-5vw" : "5vw" }}
+              whileInView={{ opacity: 1, y: "0vw" }}
+              transition={{ duration: 0.5 }}
+              className="flex-shrink-0"
+              style={{ width: "280px" }}
+            >
               <motion.div
-                initial={{ opacity: 0, y: fromAbove ? "-5vw" : "5vw" }}
-                whileInView={{ opacity: 1, y:'0vw' }}
-                transition={{ duration: 0.5 }}
-                
-            
-                
+                whileHover={{
+                  scale: 1.13,
+                  zIndex: 10,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="relative"
               >
                 <Card
                   sx={{
-                    maxWidth: "280px",
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
                     borderRadius: "16px",
                     backgroundColor: "#ffffff",
                     boxShadow: "0px 4px 12px rgba(0, 64, 0, 0.3)",
-                    transition: "transform 0.3s ease",
-                    "&:hover": {
-                      transform: "scale(1.05)",
-                      boxShadow: "0px 6px 15px rgba(0, 64, 0, 0.5)",
-                    },
+                    overflow: "visible", 
                   }}
                 >
                   <CardActionArea
@@ -213,10 +255,10 @@ export default function Levels() {
                   </CardActionArea>
                 </Card>
               </motion.div>
-            </Grid>
+            </motion.div>
           );
         })}
-      </Grid>
+      </div>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import NewsSection from "../../components/MainPage/newsSection/news/news";
 import Information from "../../components/MainPage/aboutUs/headSection/information"
 import StayConnected from "../../components/MainPage/socialMediaSection/socialMedia"
 import Footer from "../../components/Layout/footer/footer";
+import MapEmbed from "../../components/MainPage/mapSection/map";
 
 
 
@@ -20,8 +21,7 @@ export default function Home() {
         <AcademicOffer/>
         <Information/>
         <Levels/>
-        <NewsSection/>
-        <DateCalendarServerRequest/>
+        <MapEmbed/>
         <StayConnected/>
      
     </div>

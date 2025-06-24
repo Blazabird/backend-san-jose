@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import React, { useEffect, useState, useRef } from "react";
-import { fetchBannerData } from "../../../api/MainPage/banner/banner";
+import { fetchLevelBannerData } from "../../../api/LevelsPage/banners/levelBanner";
 import Alert from "@mui/material/Alert";
 import { CircularProgress } from "@mui/material";
 import { Volume2, VolumeX, Pause, Play } from "lucide-react";
@@ -10,7 +10,7 @@ import dotenv from "dotenv";
 const STRAPI_BASE = process.env.NEXT_PUBLIC_API_DOMAIN;
 const FALLBACK_IMAGE = "/images/fallback.jpg";
 
-const Banner: React.FC = () => {
+const LevelBanner: React.FC = () => {
   const [bannerData, setBannerData] = useState<any>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,7 @@ const Banner: React.FC = () => {
         if (cached && ts && Date.now() - +ts < 24 * 60 * 60 * 1000) {
           data = JSON.parse(cached);
         } else {
-          data = await fetchBannerData();
+          data = await fetchLevelBannerData();
           localStorage.setItem("bannerData", JSON.stringify(data));
           localStorage.setItem("bannerTimestamp", Date.now().toString());
         }
@@ -183,46 +183,8 @@ const Banner: React.FC = () => {
           </div>
         </>
       )}
-
-      {!isVideo && bannerData && (
-        <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start text-center md:text-left h-full px-6 md:px-20 lg:px-36 py-20">
-          <motion.div className="md:w-1/2 bg-white bg-opacity-85 p-6 rounded-2xl shadow-2xl -ml-16"  whileInView={{ opacity: 0.85 , y:'0vw' }} initial= {{opacity: 0 , y:'-10vw'}} transition={{ duration: 0.5 }}>
-            <p  className="text-green-600 uppercase font-semibold tracking-wide text-sm md:text-base mb-4 mt-24">
-              San Jose
-            </p>
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-              {bannerData.data.main.split(" ").map((w: string, i: number) => (
-                <span
-                  key={i}
-                  className={
-                    w.toLowerCase() === highlightWord.toLowerCase()
-                      ? "text-yellow-500 underline decoration-yellow-500 decoration-4"
-                      : ""
-                  }
-                >
-                  {w}{" "}
-                </span>
-              ))}
-            </h2>
-            <p className="text-gray-600 text-sm md:text-lg mt-6 leading-relaxed">
-              {bannerData.data.description}
-            </p>
-            <div className="mt-8">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onHoverStart={() => console.log('hover started!')}
-                className="relative overflow-hidden px-10 py-2 bg-green-600 text-white font-medium text-sm md:text-base rounded-lg shadow-md group"
-              >
-                <span className="absolute inset-0 bg-green-700 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
-                <span className="relative z-10 text-lg font-bold">Ver Más</span>
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default Banner;
+export default LevelBanner;

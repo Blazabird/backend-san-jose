@@ -21,5 +21,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* If you're not using Tailwind plugin for scrollbar hiding */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* styles/globals.css */
 
