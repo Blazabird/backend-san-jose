@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -21,5 +20,24 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* styles/globals.css */
+/* Custom minimalistic scrollbar */
+.scrollbar {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(107,114,128,0.7) rgba(55,65,81,0.5);
+}
 
+/* WebKit */
+.scrollbar::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: rgba(55,65,81,0.5);
+  border-radius: 9999px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(107,114,128,0.7);
+  border-radius: 9999px;
+  border: 0.125rem solid transparent;
+  background-clip: padding-box;
+}

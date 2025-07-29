@@ -14,49 +14,6 @@ import { motion } from "framer-motion";
 import LoadingCircleSpinner from "../../loading/loadingcircle";
 import { fetchLevels, Level } from "../../../api/mainPage/levels/levels";
 
-const dummyLevels: Level[] = [
-  {
-    id: 1,
-    title: "Primary Education",
-    description: "Basic education for children aged 6 to 12 years.",
-    image: "https://source.unsplash.com/random/400x300?school,1",
-    subtitle: "yes",
-    pillarDescription: "yes",
-  },
-  {
-    id: 2,
-    title: "Secondary Education",
-    description: "Intermediate education for teenagers aged 13 to 18 years.",
-    image: "https://source.unsplash.com/random/400x300?school,2",
-    subtitle: "yes",
-    pillarDescription: "yes",
-  },
-  {
-    id: 3,
-    title: "Higher Education",
-    description: "University level courses and degrees.",
-    image: "https://source.unsplash.com/random/400x300?university,3",
-    subtitle: "yes",
-    pillarDescription: "yes",
-  },
-  {
-    id: 4,
-    title: "Adult Education",
-    description: "Programs designed for adult learners and continuing education.",
-    image: "https://source.unsplash.com/random/400x300?adult,4",
-    subtitle: "yes",
-    pillarDescription: "yes",
-  },
-  {
-    id: 5,
-    title: "Special Education",
-    description: "Education tailored for students with special needs.",
-    image: "https://source.unsplash.com/random/400x300?specialeducation,5",
-    subtitle: "yes",
-    pillarDescription: "yes",
-  },
-];
-
 // Slugify helper
 const slugify = (text: string) =>
   text
@@ -74,8 +31,7 @@ export default function Levels() {
 
   useEffect(() => {
     const getLevels = async () => {
-       //const data = await fetchLevels();
-      const data = dummyLevels;
+      const data = await fetchLevels();
       setLevels(data);
       setLoading(false);
     };
@@ -93,7 +49,7 @@ export default function Levels() {
 
   if (!levels.length) {
     return (
-      <div className="bg-white pb-10 pt-10 px-6 h-[30rem] flex flex-col items-center justify-start">
+      <div className="bg-white -ml-80 pb-10 pt-10 px-6 h-[30rem] flex flex-col items-center justify-start">
         <motion.div
           className="text-center mb-8"
           whileInView={{ opacity: 1, y: "0vw" }}
@@ -126,39 +82,47 @@ export default function Levels() {
     );
   }
 
-  
   return (
-    <div className="bg-white pb-10 pt-10 px-6 overflow:hidden">
-      <motion.div
-        className="text-center mb-8"
-        whileInView={{ opacity: 1, y: "0vw" }}
-      
-        initial={{ opacity: 0, y: "25vw" }}
-        transition={{ duration: 0.3 }}
-      >
+    <div className="bg-white pb-10 pt-10 px-4 sm:px-6 overflow-hidden">
+      <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-green-600">Niveles Educativos</h1>
         <p className="text-gray-700 mt-2 max-w-xl mx-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac vestibulum erat.
         </p>
-      </motion.div>
+      </div>
 
-      <Grid container spacing={4} justifyContent="center" sx={{ maxWidth: "1600px", margin: "0 auto" }}>
+      <Grid
+        container
+        spacing={4}
+        justifyContent="center"
+        sx={{
+          width: "100%",
+          maxWidth: {
+            xs: "100%",
+            sm: "100%",
+            md: "1600px",
+          },
+          mx: "auto",
+          boxSizing: "border-box",
+          px: {
+            xs: 0,
+            sm: 0,
+            md: 0,
+          },
+        }}
+      >
         {levels.map((item, index) => {
           const fromAbove = index % 2 === 0;
 
           return (
-            <Grid item xs={12} sm={6} md={4} lg={2.4} xl={2} key={item.id}>
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={item.id} sx={{ height: "100%" }}>
               <motion.div
                 initial={{ opacity: 0, y: fromAbove ? "-5vw" : "5vw" }}
-                whileInView={{ opacity: 1, y:'0vw' }}
+                whileInView={{ opacity: 1, y: "0vw" }}
                 transition={{ duration: 0.5 }}
-                
-            
-                
               >
                 <Card
                   sx={{
-                    maxWidth: "280px",
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
@@ -173,7 +137,7 @@ export default function Levels() {
                   }}
                 >
                   <CardActionArea
-                    onClick={() => router.push(`/levels/${item.id}/${slugify(item.title)}`)}
+                    onClick={() => router.push(`/levels/${item.documentId}/${slugify(item.title)}`)}
                     sx={{ display: "flex", flexDirection: "column" }}
                   >
                     <CardMedia
@@ -183,6 +147,7 @@ export default function Levels() {
                       sx={{
                         height: "180px",
                         width: "100%",
+                        maxWidth: "100%",
                         objectFit: "cover",
                         borderRadius: "10px",
                       }}
@@ -207,7 +172,7 @@ export default function Levels() {
                           textAlign: "center",
                         }}
                       >
-                        {item.description}
+                        {item.shortDescription}
                       </Typography>
                     </CardContent>
                   </CardActionArea>

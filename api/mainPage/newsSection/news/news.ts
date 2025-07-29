@@ -1,39 +1,60 @@
+// File: api/mainPage/newsSection/news/news.ts
 
-import dotenv from "dotenv";
+const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || "";
 
-let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
+export type NewsItem = {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+  image: string;
+};
 
-export const fetchNews = async () => {
+export async function fetchNews(): Promise<NewsItem[]> {
+  if (!apiDomain) {
+    console.error("API domain not defined");
+    return [];
+  }
+
   try {
     const response = await fetch(`${apiDomain}/api/news?populate=*`, {
       method: "GET",
+      headers: { "Content-Type": "application/json" },
     });
+    if (!response.ok) throw new Error(`Error fetching news: ${response.status}`);
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch news: ${response.statusText}`);
-    }
+    const data = await response.json();
+    const twoMonthsAgo = new Date();
+    twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
 
-    const responseData = await response.json();
-    const baseURL = process.env.NEXT_PUBLIC_API_DOMAIN; 
+    return data.data
+      .map((item: any) => {
+        // Your API returns fields at the root level
+        // If you later add an image field, adjust this
+        const imageUrl = item.image?.url
+          ? `${apiDomain}${item.image.url}`
+          : "";
 
-    // Sorting the news articles by date (newest first)
-    const sortedNews = responseData.data
-      .map((item: any) => ({
-        id: item.id,
-        title: item.title,
-        description: item.description,
-        date: item.date,
-        image: item.image?.formats?.medium
-          ? `${baseURL}${item.image.formats.medium.url}`
-          : item.image?.url
-          ? `${baseURL}${item.image.url}`
-          : "", 
-      }))
-      .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());  // Sort descending by date
-
-    return sortedNews;
-  } catch (error) {
-    console.error(error);
+        return {
+          id: item.id,
+          title: item.title || "Untitled",
+          description: item.description || "",
+          date: item.date,
+          image: imageUrl,
+        } as NewsItem;
+      })
+      // Only keep the last two months
+      .filter((n: NewsItem) => {
+        const d = new Date(n.date);
+        return !isNaN(d.getTime()) && d >= twoMonthsAgo;
+      })
+      // Sort descending by date
+      .sort(
+        (a: NewsItem, b: NewsItem) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+  } catch (err) {
+    console.error("Failed to fetch news:", err);
     return [];
   }
-};
+}

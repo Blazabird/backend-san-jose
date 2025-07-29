@@ -1,5 +1,5 @@
 // src/api/pillars.ts
-import { fetchFileUrl } from "./imageFetcher/images";
+import { fetchFileUrl } from "../../imageFetcher/images";
 import dotenv from "dotenv";
 
 let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;

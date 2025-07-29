@@ -2,7 +2,6 @@
 import dotenv from "dotenv";
 
 let apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
-
 let cachedImageUrl: string | null = null;
 let cachedAt: number | null = null;
 
