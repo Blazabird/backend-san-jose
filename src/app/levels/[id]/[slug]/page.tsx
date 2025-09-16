@@ -7,6 +7,7 @@ import FaqSectionClient from "../../../../../components/levelsPage/faqSection/fa
 import { fetchLevelById } from "../../../../../api/levelsPage/dataFetcher/dataFetcher";
 import { fetchLargeImageUrl } from "../../../../../api/imageFetcher/images";
 import StayConnected from "../../../../../components/mainPage/socialMediaSection/socialMedia";
+import HowToApply from "../../../../../components/levelsPage/application/application";
 
 type Pillar = {
   id: number;
@@ -96,6 +97,8 @@ export default async function LevelPage({ params }: { params: { id: string; slug
 
       <PillarsSlider pillars={pillars} />
 
+      
+
       <InfoSectionClient
         title={level.title}
         subtitle={level.subtitle}
@@ -105,6 +108,8 @@ export default async function LevelPage({ params }: { params: { id: string; slug
         services={level.services}
         requisites={level.requisites}
       />
+
+      <HowToApply/>
 
       {faqs.length > 0 && <FaqSectionClient faqs={faqs} />}
 

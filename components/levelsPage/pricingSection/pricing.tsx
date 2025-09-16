@@ -55,11 +55,8 @@ export default function InfoSectionClient({
               <p className="mt-1">Mensualidad*</p>
               <div className="mt-4 flex items-center gap-2">
                 <span className="inline-block w-5 h-5 border-2 border-gray-900 rounded-full flex-shrink-0" />
-                <span>${pricing.tuition}.00 Matrícula y primera cuota**</span>
+                <span>${pricing.tuition} Matrícula y primera cuota**</span>
               </div>
-              <button className="mt-6 w-full bg-gray-900 text-yellow-400 py-2 rounded-full font-medium hover:bg-gray-800">
-                Iniciar proceso de admisión
-              </button>
               <p className="text-xs mt-2">*11 mensualidades | **Incluye la primera mensualidad</p>
             </div>
           )}

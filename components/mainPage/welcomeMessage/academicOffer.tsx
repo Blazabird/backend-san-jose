@@ -124,7 +124,7 @@ const OfertaAcademica: React.FC = () => {
             className="relative mt-8 overflow-hidden px-4 py-1 bg-transparent text-white font-medium text-sm md:text-base rounded-lg shadow-md group"
           >
             <span className="absolute inset-0 bg-yellow-500 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
-            <span className="relative z-10 text-sm font-bold font-poppins text-black">Leer Mas</span>
+            <span className="relative z-10 text-sm font-bold font-poppins text-black">Leer Más</span>
           </motion.button>
         </div>
       )}
@@ -132,6 +132,12 @@ const OfertaAcademica: React.FC = () => {
       <div className="w-full border-2 border-gray-300 mt-6" />
     </motion.div>
   );
+
+  // Helper to get full image URL
+  const getImageUrl = (url: string) => {
+    if (!url) return FALLBACK_IMAGE;
+    return url.startsWith("http") ? url : `${apiDomain}${url}`;
+  };
 
   return (
     <section className="py-16 px-4 text-center">
@@ -149,30 +155,25 @@ const OfertaAcademica: React.FC = () => {
         </p>
       </motion.div>
 
-      {/* Updated grid container for responsive columns */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 m-10 gap-10 md:gap-20 auto-rows-fr">
-        {/* IMAGE: spans two columns on sm/md, one on lg */}
         <motion.div
           whileInView={{ opacity: 1, y: "0vw" }}
           initial={{ opacity: 0, y: "7vw" }}
           transition={{ duration: 0.5 }}
           className="order-1 lg:order-2 col-span-1 sm:col-span-2 lg:col-span-1 flex justify-center items-center px-1 my-10 md:my-0"
         >
-          <div className="relative aspect-square w-[30rem] md:w-[40rem] lg:w-[30rem] xl:w-[36rem]">
+          <div className="relative xl:-ml-20 aspect-square w-[30rem] md:w-[40rem] lg:w-[30rem] xl:w-[36rem]">
             <Image
-              src={
-                academicOffer.Image?.url?.startsWith("http")
-                  ? academicOffer.Image.url
-                  : FALLBACK_IMAGE
-              }
+              key={getImageUrl(academicOffer.Image?.url || FALLBACK_IMAGE)} // Cache bust on update
+              src={getImageUrl(academicOffer.Image?.url || FALLBACK_IMAGE)}
               alt="Academic offer"
               fill
-              className="object-cover rounded-full border-8 border-yellow-500 shadow-lg"
+              style={{ objectFit: "cover" }}
+              className="rounded-full border-8 border-yellow-500 shadow-lg"
             />
           </div>
         </motion.div>
 
-        {/* LEFT CHARACTERISTICS */}
         <motion.div
           className="order-2 lg:order-1 col-span-1 flex flex-col text-left px-4 h-full"
           whileInView={{ opacity: 1, x: "0vw" }}
@@ -182,7 +183,6 @@ const OfertaAcademica: React.FC = () => {
           {leftSide.map(renderCharacteristic)}
         </motion.div>
 
-        {/* RIGHT CHARACTERISTICS */}
         <motion.div
           className="order-3 lg:order-3 col-span-1 flex flex-col text-left px-4 h-full"
           whileInView={{ opacity: 1, x: "0vw" }}

@@ -42,67 +42,83 @@ export default function NewsAndEvents() {
           {/* News */}
           <div className="md:col-span-2">
             <h2 className="text-2xl font-bold mb-4 text-yellow-500">Noticias Recientes</h2>
-            <div className="grid sm:grid-cols-2 gap-6">
-              {news.map((item) => (
-                <motion.div
-                  key={item.id}
-                  className="rounded-lg shadow-lg hover:shadow-xl transition bg-gray-50 flex flex-col cursor-pointer"
-                  whileHover={{ scale: 1.03 }}
-                  onClick={() => openModal({ type: "news", item })}
-                >
-                  {item.image && (
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-56 object-cover rounded-t-lg"
-                    />
-                  )}
-                  <div className="p-6 flex-grow text-black">
-                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm mb-4">
-                      {format(new Date(item.date), "d 'de' MMMM 'de' yyyy", { locale: es })}
-                    </p>
+            <div className="grid sm:grid-cols-2 gap-6 min-h-[200px]">
+              {news.length === 0 ? (
+                <div className="col-span-full flex justify-center items-center">
+                  <div className="bg-red-100 text-red-700 border border-red-300 px-4 py-2 rounded-md text-center shadow-sm">
+                    No hay noticias para mostrar.
                   </div>
-                </motion.div>
-              ))}
+                </div>
+              ) : (
+                news.map((item) => (
+                  <motion.div
+                    key={item.id}
+                    className="rounded-lg shadow-lg hover:shadow-xl transition bg-gray-50 flex flex-col cursor-pointer"
+                    whileHover={{ scale: 1.03 }}
+                    onClick={() => openModal({ type: "news", item })}
+                  >
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-56 object-cover rounded-t-lg"
+                      />
+                    )}
+                    <div className="p-6 flex-grow text-black">
+                      <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                      <p className="text-sm mb-4">
+                        {format(new Date(item.date), "d 'de' MMMM 'de' yyyy", { locale: es })}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))
+              )}
             </div>
           </div>
 
           {/* Events */}
           <div>
             <h2 className="text-2xl font-bold mb-4 text-yellow-500">Próximos Eventos</h2>
-            <div className="space-y-6">
-              {events.map((ev) => (
-                <motion.div
-                  key={ev.id}
-                  className="p-6 rounded-lg bg-gray-100 border-l-4 border-yellow-400 shadow-lg text-black"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <p className="text-sm font-semibold uppercase mb-1">
-                    {format(new Date(ev.date), "EEEE, d 'de' MMMM 'de' yyyy", { locale: es })}
-                  </p>
-                  <h3 className="text-lg font-bold mb-2">{ev.title}</h3>
-                  {ev.start && ev.end && (
-                    <div className="flex items-center gap-3 text-sm mb-1">
-                      <FaClock className="text-yellow-500" /> {ev.start} - {ev.end}
-                    </div>
-                  )}
-                  {ev.place && (
-                    <div className="flex items-center gap-3 text-sm">
-                      <FaMapMarkerAlt className="text-yellow-500" /> {ev.place}
-                    </div>
-                  )}
-                  {ev.image && (
-                    <img
-                      src={ev.image}
-                      alt={ev.title}
-                      className="w-full h-40 object-cover rounded-lg mt-3"
-                    />
-                  )}
-                </motion.div>
-              ))}
+            <div className="space-y-6 min-h-[200px] flex justify-center items-center">
+              {events.length === 0 ? (
+                <div className="bg-red-100 text-red-700 border border-red-300 px-4 py-2 rounded-md text-center shadow-sm">
+                  No hay eventos para mostrar.
+                </div>
+              ) : (
+                <div className="space-y-6 w-full">
+                  {events.map((ev) => (
+                    <motion.div
+                      key={ev.id}
+                      className="p-6 rounded-lg bg-gray-100 border-l-4 border-yellow-400 shadow-lg text-black"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <p className="text-sm font-semibold uppercase mb-1">
+                        {format(new Date(ev.date), "EEEE, d 'de' MMMM 'de' yyyy", { locale: es })}
+                      </p>
+                      <h3 className="text-lg font-bold mb-2">{ev.title}</h3>
+                      {ev.start && ev.end && (
+                        <div className="flex items-center gap-3 text-sm mb-1">
+                          <FaClock className="text-yellow-500" /> {ev.start} - {ev.end}
+                        </div>
+                      )}
+                      {ev.place && (
+                        <div className="flex items-center gap-3 text-sm">
+                          <FaMapMarkerAlt className="text-yellow-500" /> {ev.place}
+                        </div>
+                      )}
+                      {ev.image && (
+                        <img
+                          src={ev.image}
+                          alt={ev.title}
+                          className="w-full h-40 object-cover rounded-lg mt-3"
+                        />
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -121,7 +137,7 @@ export default function NewsAndEvents() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Close button always visible */}
+            {/* Close button */}
             <button
               onClick={closeModal}
               className="absolute top-3 right-3 z-10 text-black hover:text-yellow-500 transition"
