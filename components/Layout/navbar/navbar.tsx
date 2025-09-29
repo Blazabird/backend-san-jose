@@ -3,13 +3,13 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import '@fontsource/poppins/700.css';
-import { motion } from "framer-motion";
+import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/navigation';
 
 const pages = ['Inicio', 'Academico', 'Noticias & Eventos'];
@@ -23,7 +23,6 @@ const pageRoutes: { [key: string]: string } = {
 function ResponsiveAppBar() {
   const [mounted, setMounted] = React.useState(false);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -35,22 +34,16 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <AppBar position="static" sx={{ backgroundColor: '#16a34a' }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ width: '100%' }}>
+          {/* Logo */}
           <div
             style={{
               width: '60px',
@@ -76,6 +69,7 @@ function ResponsiveAppBar() {
             />
           </div>
 
+          {/* Title (desktop only) */}
           <Typography
             variant="h6"
             noWrap
@@ -94,6 +88,7 @@ function ResponsiveAppBar() {
             San Jose
           </Typography>
 
+          {/* Desktop Menu */}
           <Box
             sx={{
               flexGrow: 1,
@@ -145,29 +140,51 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+
+          {/* Mobile Hamburger (right aligned) */}
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, justifyContent: 'flex-end' }}>
+            <IconButton
+              size="large"
+              aria-label="menu"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{ display: { xs: 'block', md: 'none' } }}
+            >
+              {pages.map((page) => (
+                <MenuItem
+                  key={page}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    const route = pageRoutes[page];
+                    if (route) router.push(route);
+                  }}
+                >
+                  {page}
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
         </Toolbar>
       </Container>
-
-      {/* Dropdown Menus */}
-      <Menu anchorEl={anchorElNav} open={Boolean(anchorElNav)} onClose={handleCloseNavMenu}>
-        {pages.map((page) => (
-          <MenuItem
-            key={page}
-            onClick={() => {
-              handleCloseNavMenu();
-              const route = pageRoutes[page];
-              if (route) router.push(route);
-            }}
-          >
-            {page}
-          </MenuItem>
-        ))}
-      </Menu>
-
-      <Menu anchorEl={anchorElUser} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
-        <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
-        <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
-      </Menu>
     </AppBar>
   );
 }
