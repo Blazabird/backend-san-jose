@@ -28,7 +28,7 @@ const style = {
 
 export default function PhilosophySection() {
   return (
-    <section className="bg-green-50 py-20 px-6 font-[Poppins]">
+    <section className="bg-green-50 py-20 px-6 font-poppins font-bold">
       <motion.div
         className="max-w-6xl mx-auto text-center mb-12"
         initial={{ opacity: 0, y: 40 }}

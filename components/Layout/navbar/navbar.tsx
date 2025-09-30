@@ -12,12 +12,13 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/navigation';
 
-const pages = ['Inicio', 'Academico', 'Noticias & Eventos'];
+
+const pages = ['Inicio', 'Académico', 'Noticias y Eventos'];
 
 const pageRoutes: { [key: string]: string } = {
   "Inicio": "/",
-  "Academico": "/academics",
-  "Noticias & Eventos": "/news"
+  "Académico": "/academics",
+  "Noticias y Eventos": "/news"
 };
 
 function ResponsiveAppBar() {

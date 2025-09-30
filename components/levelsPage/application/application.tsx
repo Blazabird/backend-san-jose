@@ -74,7 +74,7 @@ const HowToApply: React.FC = () => {
 
   if (!steps.length) {
     return (
-      <div className="flex items-center justify-center min-h-[200px]">
+      <div className="flex items-center justify-center min-h-[200px] ">
         <div className="bg-red-50 text-red-700 px-6 py-4 rounded-lg shadow-md text-center border border-red-200">
           No hay pasos de aplicación disponibles en este momento.
         </div>
@@ -83,8 +83,8 @@ const HowToApply: React.FC = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto py-12 px-6">
-      <h2 className="text-4xl font-bold text-center mb-14 text-yellow-600 tracking-wide">
+    <section className="max-w-6xl mx-auto py-12 px-6 mb-16">
+      <h2 className="text-4xl font-bold text-center mb-14 text-yellow-500 tracking-wide">
         Proceso de admisión
       </h2>
 
@@ -117,7 +117,7 @@ const HowToApply: React.FC = () => {
               onClick={() =>
                 setActiveStep(activeStep === index ? null : index)
               }
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-green-500 text-white font-bold shadow-md transition-transform duration-200 hover:bg-green-700 hover:scale-110"
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-green-600 text-white font-bold shadow-md transition-transform duration-200 hover:bg-green-700 hover:scale-110"
             >
               {index + 1}
             </div>
@@ -131,7 +131,7 @@ const HowToApply: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.25 }}
-                  className="absolute top-16 bg-white border border-yellow-200 rounded-xl shadow-lg p-4 max-w-xs text-center z-20"
+                  className="absolute top-16 bg-zinc-100 border-2 border-yellow-500  rounded-xl shadow-2xl p-4 max-w-xs text-center z-20"
                 >
                   <h3 className="text-lg font-semibold text-yellow-700 mb-2">
                     {steps[index].title}

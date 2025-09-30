@@ -13,7 +13,7 @@ const achievements = [
 
 export default function AchievementsSection() {
   return (
-    <section className="bg-white pt-10 pb-5 px-6 font-[Poppins]">
+    <section className="bg-white pt-10 pb-5 px-6 font-bold font-poppins">
       <motion.div
         className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center"
         initial={{ opacity: 0, y: 40 }}
@@ -44,14 +44,14 @@ export default function AchievementsSection() {
             {achievements.map((achievement, index) => (
               <motion.li
                 key={index}
-                className="flex items-start gap-3 bg-green-50 p-3 rounded-lg shadow-sm hover:shadow-md transition duration-300"
+                className="flex items-start gap-3 font-poppins bg-green-50 p-3 rounded-lg shadow-sm hover:shadow-md transition duration-300"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
                 <FaTrophy className="text-yellow-500 text-lg mt-1 shrink-0" />
-                <span className="text-gray-800 text-base">{achievement}</span>
+                <span className="text-gray-800 font-poppins text-base">{achievement}</span>
               </motion.li>
             ))}
           </ul>

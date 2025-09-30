@@ -111,7 +111,7 @@ const OfertaAcademica: React.FC = () => {
         <h3 className="text-2xl font-bold font-poppins text-green-600 mb-2 md:text-3xl lg:text-xl">
           {item.Title}
         </h3>
-        <p className="text-base text-gray-800 font-medium font-poppins">
+        <p className="text-base text-gray-800  font-bold font-poppins">
           {item.description}
         </p>
       </div>
@@ -124,7 +124,7 @@ const OfertaAcademica: React.FC = () => {
             className="relative mt-8 overflow-hidden px-4 py-1 bg-transparent text-white font-medium text-sm md:text-base rounded-lg shadow-md group"
           >
             <span className="absolute inset-0 bg-yellow-500 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
-            <span className="relative z-10 text-sm font-bold font-poppins text-black">Leer Más</span>
+            <a className="relative z-10 text-sm font-bold font-poppins text-black" href={`/academics`}>Leer Más</a>
           </motion.button>
         </div>
       )}
@@ -150,7 +150,7 @@ const OfertaAcademica: React.FC = () => {
         <h2 className="text-4xl font-bold font-poppins text-green-600 uppercase tracking-widest mb-8">
           {academicOffer.title}
         </h2>
-        <p className="text-lg text-black font-poppins font-bold mb-24 max-w-7xl mx-auto">
+        <p className="text-lg text-black  font-poppins font-bold mb-24 max-w-7xl mx-auto">
           {academicOffer.description}
         </p>
       </motion.div>
@@ -160,7 +160,7 @@ const OfertaAcademica: React.FC = () => {
           whileInView={{ opacity: 1, y: "0vw" }}
           initial={{ opacity: 0, y: "7vw" }}
           transition={{ duration: 0.5 }}
-          className="order-1 lg:order-2 col-span-1 sm:col-span-2 lg:col-span-1 flex justify-center items-center px-1 my-10 md:my-0"
+          className="order-1 lg:order-2 col-span-1 sm:col-span-2 font-bold lg:col-span-1 flex justify-center items-center px-1 my-10 md:my-0"
         >
           <div className="relative xl:-ml-20 aspect-square w-[30rem] md:w-[40rem] lg:w-[30rem] xl:w-[36rem]">
             <Image
@@ -175,7 +175,7 @@ const OfertaAcademica: React.FC = () => {
         </motion.div>
 
         <motion.div
-          className="order-2 lg:order-1 col-span-1 flex flex-col text-left px-4 h-full"
+          className="order-2 lg:order-1 font-bold col-span-1 flex flex-col text-left px-4 h-full"
           whileInView={{ opacity: 1, x: "0vw" }}
           initial={{ opacity: 0, x: "-15vw" }}
           transition={{ duration: 0.5 }}
@@ -200,7 +200,7 @@ const OfertaAcademica: React.FC = () => {
               <h2 className="text-2xl font-bold text-green-700 mb-4 font-poppins">
                 {modalContent.Title}
               </h2>
-              <p className="text-gray-800 font-poppins">
+              <p className="text-gray-800 font-bold font-poppins">
                 {modalContent.description}
               </p>
             </>

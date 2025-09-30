@@ -28,7 +28,7 @@ export default function PillarsSlider({ pillars }: { pillars: Pillar[] }) {
     };
 
     return (
-        <div className="flex flex-col items-center text-center px-4 mb-24 overflow-x-hidden">
+        <div className="flex flex-col items-center text-center px-4 mb-8 overflow-x-hidden">
             <h2 className="text-4xl font-bold text-green-700 font-poppins mb-8">
                 Nuestros Pilares
             </h2>
