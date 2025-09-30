@@ -153,48 +153,66 @@ export default function PillarsSlider({ pillars }: { pillars: Pillar[] }) {
             </div>
 
             {/* Modal */}
+            {/* Modal */}
             {modalContent && (
                 <div
-                    className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4"
+                    className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-2 sm:px-4"
                     onClick={() => setModalContent(null)}
                 >
                     <motion.div
-                        className="bg-white p-6 md:p-10 rounded-xl max-w-3xl w-full text-left relative overflow-y-auto max-h-[90vh]"
+                        className="
+        w-full h-full bg-white overflow-y-auto p-4
+        sm:relative sm:rounded-xl sm:max-w-3xl sm:max-h-[90vh] sm:p-8
+      "
                         onClick={(e) => e.stopPropagation()}
-                        initial={{ scale: 0.9, opacity: 0 }}
+                        initial={{ scale: 0.95, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.3 }}
                     >
+                        {/* Close button */}
                         <button
                             onClick={() => setModalContent(null)}
-                            className="absolute top-4 right-4 text-gray-700 hover:text-yellow-500"
+                            className="
+          fixed top-4 right-4 text-gray-700 hover:text-yellow-500 z-50
+          sm:absolute sm:top-4 sm:right-4
+        "
                         >
-                            <FaTimes size={24} />
+                            <FaTimes size={26} />
                         </button>
-                        <h2 className="text-2xl font-bold text-yellow-600 mb-4">
+
+                        {/* Title */}
+                        <h2 className="text-xl sm:text-2xl font-bold text-yellow-600 mb-4">
                             {modalContent.Name}
                         </h2>
+
+                        {/* Sections */}
                         <div className="mb-6">
-                            <h3 className="text-lg font-semibold text-green-700 mb-2">¿Qué es?</h3>
-                            <p className="text-gray-600 text-sm italic leading-relaxed">
+                            <h3 className="text-base sm:text-lg font-semibold text-green-700 mb-2">
+                                ¿Qué es?
+                            </h3>
+                            <p className="text-gray-600 text-sm leading-relaxed">
                                 {modalContent.description}
                             </p>
                         </div>
+
                         <div className="mb-6">
-                            <h3 className="text-lg font-semibold text-green-700 mb-2">¿Cómo se logra?</h3>
-                            <p className="text-gray-600 text-sm italic leading-relaxed">
+                            <h3 className="text-base sm:text-lg font-semibold text-green-700 mb-2">
+                                ¿Cómo se logra?
+                            </h3>
+                            <p className="text-gray-600 text-sm leading-relaxed">
                                 {modalContent.logro ?? "Información no disponible."}
                             </p>
-
                         </div>
+
+                        {/* Image */}
                         {modalContent.image && (
-                            <div className="relative w-full h-[250px] md:h-[300px] lg:h-[400px] rounded-lg overflow-hidden shadow-lg">
+                            <div className="relative w-full h-[220px] sm:h-[250px] md:h-[300px] rounded-lg overflow-hidden shadow-lg">
                                 <Image
                                     src={modalContent.image}
                                     alt={modalContent.Name || "Pillar image"}
                                     fill
                                     className="object-cover"
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 900px"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 900px"
                                     quality={90}
                                 />
                             </div>
@@ -202,6 +220,7 @@ export default function PillarsSlider({ pillars }: { pillars: Pillar[] }) {
                     </motion.div>
                 </div>
             )}
+
         </div>
     );
 }

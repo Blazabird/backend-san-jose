@@ -87,7 +87,7 @@ export default function Levels() {
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-green-600">Niveles Educativos</h1>
         <p className="text-gray-700 mt-2 max-w-xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac vestibulum erat.
+          Ofrecemos diversos niveles educativos. En esta sección se muestran todos nuestros servicios educativos.
         </p>
       </div>
 

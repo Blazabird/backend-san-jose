@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react"; // ✅ lightweight icon for close button
 
 const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
 
@@ -83,91 +82,90 @@ const HowToApply: React.FC = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto py-12 px-6 mb-16">
+    <section className="max-w-6xl mx-auto -mt-36 md:mt-8 md:py-12 px-6 mb-16">
       <h2 className="text-4xl font-bold text-center mb-14 text-yellow-500 tracking-wide">
         Proceso de admisión
       </h2>
 
-      {/* Timeline */}
-      <div
-        className={`relative flex ${
-          isMobile
-            ? "flex-col items-center space-y-10"
-            : "flex-row items-center justify-between"
-        }`}
-      >
-        {/* Full background line */}
-        {!isMobile && (
-          <div className="absolute top-1/2 left-0 w-full h-1 bg-yellow-300 -translate-y-1/2 rounded-full z-0"></div>
-        )}
-        {isMobile && (
-          <div className="absolute left-1/2 top-0 h-full w-1 bg-yellow-300 -translate-x-1/2 rounded-full z-0"></div>
-        )}
-
-        {/* Steps */}
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className={`relative flex flex-col items-center cursor-pointer z-10 ${
-              isMobile ? "w-full" : "flex-1"
-            }`}
-          >
-            {/* Circle */}
+      {/* ✅ Mobile Card Layout */}
+      {isMobile ? (
+        <div className="space-y-6 w-full">
+          {steps.map((step, index) => (
             <div
+              key={index}
               onClick={() =>
                 setActiveStep(activeStep === index ? null : index)
               }
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-green-600 text-white font-bold shadow-md transition-transform duration-200 hover:bg-green-700 hover:scale-110"
+              className="bg-white shadow-md rounded-lg p-4 border border-yellow-200 cursor-pointer transition hover:shadow-lg"
             >
-              {index + 1}
-            </div>
-
-            {/* Desktop popup bubble */}
-            {!isMobile && activeStep === index && (
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-600 text-white font-bold">
+                  {index + 1}
+                </div>
+                <h3 className="font-semibold text-yellow-700 text-lg">
+                  {step.title}
+                </h3>
+              </div>
               <AnimatePresence>
-                <motion.div
-                  ref={bubbleRef}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.25 }}
-                  className="absolute top-16 bg-zinc-100 border-2 border-yellow-500  rounded-xl shadow-2xl p-4 max-w-xs text-center z-20"
-                >
-                  <h3 className="text-lg font-semibold text-yellow-700 mb-2">
-                    {steps[index].title}
-                  </h3>
-                  <p className="text-yellow-800 text-sm">
-                    {steps[index].description}
-                  </p>
-                </motion.div>
+                {activeStep === index && (
+                  <motion.p
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="mt-2 text-yellow-800 text-base"
+                  >
+                    {step.description}
+                  </motion.p>
+                )}
               </AnimatePresence>
-            )}
-          </div>
-        ))}
-      </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        // ✅ Desktop Timeline Layout
+        <div className="relative flex flex-row items-center justify-between">
+          {/* Full background line */}
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-yellow-300 -translate-y-1/2 rounded-full z-0"></div>
 
-      {/* Mobile modal */}
-      {isMobile && activeStep !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          {/* Overlay */}
-          <div
-            className="absolute inset-0 bg-black/40"
-            onClick={() => setActiveStep(null)}
-          />
-          {/* Modal content */}
-          <div className="relative bg-white rounded-xl shadow-xl p-6 max-w-sm w-full z-10">
-            {/* Close X button */}
-            <button
-              onClick={() => setActiveStep(null)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 transition"
+          {/* Steps */}
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="relative flex flex-col items-center cursor-pointer z-10 flex-1"
             >
-              <X size={22} />
-            </button>
-            <h3 className="text-xl font-semibold text-yellow-700 mb-2">
-              {steps[activeStep].title}
-            </h3>
-            <p className="text-yellow-800">{steps[activeStep].description}</p>
-          </div>
+              {/* Circle */}
+              <div
+                onClick={() =>
+                  setActiveStep(activeStep === index ? null : index)
+                }
+                className="w-12 h-12 flex items-center justify-center rounded-full bg-green-600 text-white font-bold shadow-md transition-transform duration-200 hover:bg-green-700 hover:scale-110"
+              >
+                {index + 1}
+              </div>
+
+              {/* Popup bubble */}
+              {activeStep === index && (
+                <AnimatePresence>
+                  <motion.div
+                    ref={bubbleRef}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.25 }}
+                    className="absolute top-16 bg-zinc-100 border-2 border-yellow-500 rounded-xl shadow-2xl p-4 max-w-xs text-center z-20"
+                  >
+                    <h3 className="text-lg font-semibold text-yellow-700 mb-2">
+                      {steps[index].title}
+                    </h3>
+                    <p className="text-yellow-800 text-sm">
+                      {steps[index].description}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              )}
+            </div>
+          ))}
         </div>
       )}
     </section>
